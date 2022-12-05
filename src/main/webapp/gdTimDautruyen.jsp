@@ -62,6 +62,7 @@
             	Dautruyen025 pList = (Dautruyen025) itr.next(); 
             	
         		request.setAttribute("truyenSelected", pList);
+        		session.setAttribute("truyen_id", pList.getIddautruyen());
 				%>
 		        <tr style="background-color:<%=color%>;" 
 		        onclick="window.document.location='dongiasoluong?truyen_id=<%=pList.getIddautruyen()%>'">

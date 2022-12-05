@@ -44,7 +44,6 @@
             <td align="center"><b>Địa chỉ</b></td>
             <td align="center"><b>Email</b></td>
             <td align="center"><b>SĐT</b></td>
-            <td align="center"><b>Mô tả</b></td>
         </tr>
         <%
             int count = 0;
@@ -62,6 +61,7 @@
             	Nhacungcap025 pList = (Nhacungcap025) itr.next(); 
             	
         		request.setAttribute("nccSelected", pList);
+        		session.setAttribute("ncc_id", pList.getMancc());
 				%>
 		        <tr style="background-color:<%=color%>;" 
 		        onclick="window.document.location='hoadonnhap?ncc_id=<%=pList.getMancc()%>'">
@@ -71,7 +71,7 @@
 		            <td><%=pList.getDiachi()%></td>
 		            <td><%=pList.getEmail()%></td>
 		            <td><%=pList.getSdt()%></td>
-		            <td><%=pList.getMota()%></td>
+
 		        </tr>
 		        <%
              }

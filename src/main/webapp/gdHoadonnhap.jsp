@@ -16,14 +16,18 @@
 	
 	<% 
 		Nhacungcap025 ncc = (Nhacungcap025) request.getAttribute("nccSelected");
+		session.setAttribute("nhacungcap", ncc);
 		Hoadonnhap025 x = (Hoadonnhap025) request.getAttribute("hoadonnhap");
+		System.out.print("x"+ x);
+		Nhacungcap025 n = (Nhacungcap025)session.getAttribute("nhacungcap");
+		
 	%>
 	<b>Thông tin nhà cung cấp</b>
-	<p><b>Mã: </b> <%=ncc.getMancc()%> </p>
-	<p><b>Tên: </b> <%=ncc.getTen()%> </p>
-	<p><b>Địa chỉ: </b> <%=ncc.getDiachi()%> </p>
-	<p><b>Email: </b><%=ncc.getEmail()%></p>
-	<p><b>SĐT: </b><%=ncc.getSdt()%> </p>
+	<p><b>Mã: </b> <%=n.getMancc()%> </p>
+	<p><b>Tên: </b> <%=n.getTen()%> </p>
+	<p><b>Địa chỉ: </b> <%=n.getDiachi()%> </p>
+	<p><b>Email: </b><%=n.getEmail()%></p>
+	<p><b>SĐT: </b><%=n.getSdt()%> </p>
 	
 	<button onclick="window.location='gdTimDautruyen.jsp'" height="50px" style="background-color: #04AA6D;color: #fff;border: none; border-radius: 5px;padding: 10px 15px;">Thêm đầu truyện</button>
 	
@@ -44,8 +48,12 @@
         <%
             int count = 0;
             String color = "#f2f2f2";
-            if (request.getAttribute("hoadondautruyen") != null) {
-				ArrayList al = (ArrayList) request.getAttribute("hoadondautruyen");
+            if (request.getAttribute("hoadonnhap") != null) {
+            	
+				//Hoadonnhap025 hd = (Hoadonnhap025) request.getAttribute("hoadonnhap");
+				List<HoadonDautruyen025> al = x.getList();
+				
+				System.out.print("x"+x.getList());
                 Iterator itr = al.iterator();
                 while (itr.hasNext()) {
 					if ((count % 2) == 0) {

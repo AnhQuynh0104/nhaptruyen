@@ -11,6 +11,7 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import model.HoadonDautruyen025;
 import model.Hoadonnhap025;
 import model.Nhacungcap025;
@@ -50,16 +51,25 @@ public class HoadonnhapServlet extends HttpServlet {
 		//doGet(request, response);
 		String dongia = request.getParameter("dongia");
 		String soluong = request.getParameter("soluong");
-		String truyen_id = (String) request.getAttribute("truyen_id");
-		String ncc_id = (String) request.getAttribute("ncc_id");
+		HttpSession session = request.getSession();
+		int ncc_id = (int) session.getAttribute("ncc_id");
+		int truyen_id = (int) session.getAttribute("truyen_id");
 		System.out.println("dongia " + dongia + " soluong " + soluong + " truyen_id " + truyen_id + " ncc_id " + ncc_id);
 		List<HoadonDautruyen025> list = new ArrayList<>();
-		HoadonDautruyen025 x = new HoadonDautruyen025(new DautruyenDAO().getDautruyen025byId(Integer.parseInt(truyen_id)),
+		HoadonDautruyen025 x = new HoadonDautruyen025(new DautruyenDAO().getDautruyen025byId(truyen_id),
 				Double.parseDouble(dongia), Integer.parseInt(soluong));
+		System.out.println("hoadontruyen"+x);
 		list.add(x);
-		Nhacungcap025 ncc = new NhacungcapDAO().getNhacungcap025byId(Integer.parseInt(ncc_id));
+		Nhacungcap025 ncc = new NhacungcapDAO().getNhacungcap025byId(ncc_id);
 		Hoadonnhap025 hd = new Hoadonnhap025(ncc, list, Double.parseDouble(dongia)*Double.parseDouble(soluong));
+		System.out.println("hoadon"+hd);
 		request.setAttribute("hoadonnhap", hd);
+		if(hd != null) {
+			new HoadonnhapDAO().themHoadonnhap(hd);
+			request.getRequestDispatcher("gdHoadonnhap.jsp").forward(request, response);
+		}
+		//response.sendRedirect("gdHoadonnhap.jsp");
+		
 	}
 	
 	protected void luuNhacungcap(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

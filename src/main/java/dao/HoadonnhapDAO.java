@@ -16,31 +16,6 @@ public class HoadonnhapDAO extends DAO{
 		super();
 	}
 	
-//	public ArrayList<Dautruyen025> getDautruyen025(String ten){
-//		ArrayList<Dautruyen025> kq = null;
-//		String QUERY_NCC = "select * from dautruyen where ten like ?";	
-//		try {
-//			ps = (PreparedStatement) con.prepareStatement(QUERY_NCC);
-//			ps.setString(1, '%' +  ten + '%');
-//			rs = ps.executeQuery();
-//			
-//			while(rs.next()) {
-//				if(kq == null) kq = new ArrayList<Dautruyen025>();
-//				Dautruyen025 truyen = new Dautruyen025();
-//				truyen.setIddautruyen(rs.getInt("iddautruyen"));
-//				truyen.setTen(rs.getString("ten"));
-//				truyen.setTacgia(rs.getString("tacgia"));
-//				truyen.setNhaxuatban(rs.getString("nhaxuatban"));
-//				truyen.setNamxuatban(rs.getString("namxuatban"));
-//				kq.add(truyen);
-//			}
-//		} catch (Exception e) {
-//			// TODO: handle exception
-//			e.printStackTrace();
-//			kq = null;
-//		}
-//		return kq;
-//	}
 	
 	public void themHoadonnhap(Hoadonnhap025 hd) {
 		String QUERY_HOADON = "insert into hoadonnhap(mancc, tongtien) values(?,?,?) ";
